@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Referral Bonus Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffecdc;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .calculator-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        padding: 5px;
+        background-color: #bac2d5;
+        border-radius: 10px;
+        box-shadow: #2e426f;
+        max-width: 400px;
+      }
+
+      input {
+        padding: 10px;
+        width: 80%;
+        margin-top: 5px;
+        margin-left: 5px;
+        margin-right: 5px;
+        border: 1px solid #a67044;
+        border-radius: 5px;
+      }
+
+      .result-container {
+        background-color: #fff3dc;
+        border-radius: 10px;
+        margin-top: 20px;
+      }
+
+      p {
+        font-size: 18px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="calculator-container">
+      <h1>Referral Bonus Calculator</h1>
+      <label for="payment"
+        >Enter Payment of the Referred person in dollars:</label
+      >
+      <input
+        type="number"
+        id="payment"
+        placeholder="If the person earned..."
+        oninput="calculateBonus()"
+      />
+
+      <div id="result" class="result-container">
+        <p>Your Referral Bonus is: $<span id="bonus"></span></p>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    function calculateBonus() {
+      const newHostPayment = parseFloat(
+        document.getElementById("payment").value
+      );
+
+      let bonusPercent = 0;
+      if (newHostPayment < 105) {
+        bonusPercent = 0;
+      } else if (newHostPayment < 301) {
+        bonusPercent = 0.1;
+      } else if (newHostPayment < 601) {
+        bonusPercent = 0.15;
+      } else if (newHostPayment < 1201) {
+        bonusPercent = 0.2;
+      } else if (newHostPayment < 2101) {
+        bonusPercent = 0.25;
+      } else if (newHostPayment < 3001) {
+        bonusPercent = 0.3;
+      } else {
+        bonusPercent = 0.35;
+      }
+
+      const bonus = isNaN(newHostPayment) ? 0 : newHostPayment * bonusPercent;
+      document.getElementById("bonus").textContent = bonus.toFixed(2);
+    }
+  </script>
+</html>
